@@ -4,11 +4,24 @@
   "description": "",
   "repository": "https://github.com/rechtburg/ReactChatApp.git",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "YUKI SHIROTA",
   "license": "ISC",
+  "scripts": {
+    "dev": "webpack-dev-server --mode development --config webpack.dev.js",
+    "lint": "npm tslint ./src/**/*.{ts,tsx}",
+    "fix": "npm tslint --fix ./src/**/*.{ts,tsx}"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "npm run fix",
+      "git add"
+    ]
+  },
   "dependencies": {
     "@types/react": "^16.8.18",
     "@types/react-dom": "^16.8.4",
@@ -37,3 +50,4 @@
     "webpack-dev-server": "^3.4.1"
   }
 }
+
