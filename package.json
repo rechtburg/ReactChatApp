@@ -2,15 +2,42 @@
   "name": "reactchatapp",
   "version": "1.0.0",
   "description": "",
-  "repository": "https://github.com/rechtburg/ReactChatApp.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rechtburg/ReactChatApp.git"
+  },
   "main": "index.js",
   "author": "YUKI SHIROTA",
   "license": "ISC",
   "scripts": {
+    "build": "webpack",
     "dev": "webpack-dev-server --mode development --hot --open --config webpack.dev.js",
     "lint": "tslint ./src/**/*.{ts,tsx}",
     "lint:prettier-check": "tslint-config-prettier-check ./tslint.json",
-    "fix": "tslint --fix ./src/**/*.{ts,tsx}"
+    "fix": "tslint --fix ./src/**/*.{ts,tsx}",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --verbose --coverage"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "setupFiles": [
+      "./src/test-setup.ts"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/__tests__/*.test.(ts|tsx)"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
   },
   "husky": {
     "hooks": {
@@ -24,6 +51,7 @@
     ]
   },
   "dependencies": {
+    "@types/node": "^12.0.2",
     "@types/react": "^16.8.18",
     "@types/react-dom": "^16.8.4",
     "@types/react-redux": "^7.0.9",
@@ -36,10 +64,18 @@
     "redux": "^4.0.1"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.9.2",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "^24.0.13",
     "css-loader": "^2.1.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.1",
     "husky": "^2.3.0",
+    "jest": "^24.8.0",
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
+    "source-map-loader": "^0.2.4",
+    "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.1",
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
