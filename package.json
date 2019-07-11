@@ -10,8 +10,10 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack",
+    "build:storybook": "build-storybook -o public-storybook",
     "dev": "webpack-dev-server --mode development --config webpack.dev.js",
+    "check": "tsc --noEmit --pretty",
     "lint": "tslint './src/**/*.ts' './src/**/*.tsx'",
     "lint:fix": "tslint --fix './src/**/*.ts' './src/**/*.tsx'",
     "lint:prettier-check": "tslint-config-prettier-check ./tslint.json",
