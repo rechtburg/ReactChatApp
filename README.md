@@ -8,10 +8,10 @@ This is ChatApp using React & Typescirpt!!
 Application structure is based on Clean Architecture with BLoC Pattern!!
 
 == Application
-On the Way!!
+https://clean-react-chat-app.firebaseapp.com/
 
 == Storybook
-On the Way!!
+https://rechtburg.github.io/ReactChatApp/.
 
 == Get started
 
