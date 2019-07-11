@@ -1,15 +1,13 @@
 version: 2
 general_options: &general_options
   docker:
-    # specify the version you desire here
-    - image: circleci/node:10.6
+    - image: circleci/node:12
   working_directory: ~/repo
 jobs:
   checkout:
     <<: *general_options
     steps:
       - checkout
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package-lock.json" }}
@@ -17,14 +15,13 @@ jobs:
           name: Install dependencies
           command: npm ci
       - save_cache:
-          keys: v1-dependencies-{{ checksum "package-lock.json" }}
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
       - persist_to_workspace:
           root: ~/repo
           paths:
             - .
-
   lint:
     <<: *general_options
     steps:
@@ -39,7 +36,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Try compile code
+          name: Try compiling code
           command: npm run check
   build:
     <<: *general_options
@@ -48,7 +45,7 @@ jobs:
           at: ~/repo
       - run:
           name: Build
-          command: npm run build
+          command: npm run build -- --mode production
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -59,7 +56,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Deploy product to firebase
+          name: Deploy to production environment
           command: npx firebase-tools deploy --project $FIREBASE_PROJECT_ID --token $FIREBASE_TOKEN --only hosting
   build-storybook:
     <<: *general_options
@@ -68,7 +65,7 @@ jobs:
           at: ~/repo
       - run:
           name: Build storybook
-          command: npm run build:storybook
+          command: $(npm bin)/build-storybook -o public-storybook
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -79,9 +76,9 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Deploy storybook to firebase
-          command: npx firebase-tools deploy --project $FIREBASE_STORYBOOK_PROJECT_ID --token $FIREBASE_STORYBOOK_TOKEN --only hosting
-workspace:
+          name: Deploy storybook
+          command: npx firebase-tools deploy --project $FIREBASE_STORYBOOK_PROJECT_ID --token $FIREBASE_TOKEN --only hosting --public public-storybook
+workflows:
   version: 2
   default:
     jobs:

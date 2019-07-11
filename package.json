@@ -10,7 +10,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack",
     "build:storybook": "build-storybook -o public-storybook",
     "dev": "webpack-dev-server --mode development --config webpack.dev.js",
     "check": "tsc --noEmit --pretty",
