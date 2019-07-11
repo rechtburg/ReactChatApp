@@ -18,6 +18,7 @@
     "lint:fix": "tslint --fix './src/**/*.ts' './src/**/*.tsx'",
     "lint:prettier-check": "tslint-config-prettier-check ./tslint.json",
     "storybook": "start-storybook -p 6006 -c .storybook",
+    "storybook:deploy": "storybook-to-ghpages",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --verbose --coverage"
