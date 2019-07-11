@@ -105,13 +105,3 @@ workspace:
               only: master
           requires:
             - build
-      - build-storybook:
-          requires:
-            - lint
-            - dry-compile
-      - deploy-storybook:
-          filters:
-            branches:
-              only: master
-          requires:
-            - build-storybook
