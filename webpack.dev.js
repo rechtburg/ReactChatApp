@@ -1,25 +1,17 @@
-const path = require('path')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  devtool: 'source-map',
-  devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
-    port: 4000,
-    inline: true,
-    hot: true,
-    open: true,
-    overlay: true
-  },
   entry: {
     bundle: './src/app.tsx',
   },
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'public'),
+    filename: '[name].bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', 'json', '.css'],
+    extensions: ['.js', '.ts', '.tsx', 'json'],
   },
   module: {
     rules: [
@@ -28,11 +20,21 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'ts-loader',
       },
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: "source-map-laoder"
-      },
     ],
   },
-}
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Loading...",
+      template: "./src/index.html",
+      hash: true,
+      config
+    })
+  ],
+  devServer: {
+    port: 4000,
+    historyApiFallBack: true,
+    hot: true,
+    open: true,
+    overlay: true
+  },
+};

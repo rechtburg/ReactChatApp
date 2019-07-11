@@ -1,17 +1,27 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
-    "outDir": "./dist",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "./public",
     "lib": [
       "es2018",
       "dom"
     ],
     "jsx": "react",
-    "removeComments": true,
-    "sourceMap": true,
-    "strict": true,
     "typeRoots": ["./types", "./node_modules/@types"],
+    "removeComments": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
     "allowSyntheticDefaultImports": true
   },
   "include": [
@@ -19,7 +29,7 @@
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "public"
   ],
   "types": ["jest"]
 }
