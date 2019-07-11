@@ -7,7 +7,7 @@
     "url": "https://github.com/rechtburg/ReactChatApp.git"
   },
   "author": "YUKI SHIROTA",
-  "license": "ISC",
+  "license": "MIT",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
