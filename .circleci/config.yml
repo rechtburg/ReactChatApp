@@ -57,7 +57,7 @@ jobs:
           at: ~/repo
       - run:
           name: Deploy production to firebase
-          command: npx firebase-tools deploy --project $FIREBASE_PROJECT_ID --token $FIREBASE_TOKEN --only hosting
+          command: npx firebase-tools deploy --project=$FIREBASE_PROJECT_ID --token=$FIREBASE_TOKEN --only hosting
   deploy-storybook:
     <<: *general_options
     steps:
