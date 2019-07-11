@@ -52,7 +52,7 @@ jobs:
       - run:
           name: Build
           command: npm run build
-      - persist_on_workspace:
+      - persist_to_workspace:
           root: ~/repo
           paths:
             - .
@@ -72,7 +72,7 @@ jobs:
       - run:
           name: Build storybook
           command: npm run build:storybook
-      - persist_on_workspace:
+      - persist_to_workspace:
           root: ~/repo
           paths:
             - .
