@@ -70,13 +70,13 @@ jobs:
           root: ~/repo
           paths:
             - .
-  deploy-production:
+  deploy-storybook:
     <<: *general_options
     steps:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Deploy production to firebase
+          name: Deploy storybook to firebase
           command: npx firebase-tools deploy --token=$FIREBASE_TOKEN --project=$FIREBASE_STORYBOOK_PROJECT_ID --only hosting
 workflows:
   version: 2
