@@ -1,0 +1,117 @@
+version: 2
+general_options: &general_options
+  docker:
+    # specify the version you desire here
+    - image: circleci/node:10.6
+  working_directory: ~/repo
+jobs:
+  checkout:
+    <<: *general_options
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+        name: Install dependencies
+        command: npm ci
+      - save_cache:
+          keys: v1-dependencies-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
+
+  lint:
+    <<: *general_options
+    steps:
+      - attach_workspace:
+        at: ~/repo
+      - run:
+        name: Lint code
+        command: npm run lint
+  dry-compile:
+    <<: *general_options
+    steps:
+      - attach_workspace:
+        at: ~/repo
+      - run:
+        name: Try compile code
+        command: npm run check
+  build:
+    <<: *general_options
+    steps:
+      - attach_workspace:
+        at: ~/repo
+      - run:
+        name: Build
+        command: npm run build
+      - persist_on_workspace:
+        root: ~/repo
+        paths:
+          - .
+  deploy-production:
+    <<: *general_options
+    steps:
+      - attach_workspace:
+        at: ~/repo
+      - run:
+        name: Deploy product to firebase
+        command: npx firebase-tools deploy --project $FIREBASE_PROJECT_ID --token $FIREBASE_TOKEN --only hosting
+  build-storybook:
+    <<: *general_options
+    steps:
+      - attach_workspace:
+        at: ~/repo
+      - run:
+        name: Build storybook
+        command: npm run build:storybook
+      - persist_on_workspace:
+        root: ~/repo
+        paths:
+          - .
+  deploy-storybook:
+    <<: *general_options
+    steps:
+      - attach_workspace:
+        at: ~/repo
+      - run:
+        name: Deploy storybook to firebase
+        command: npx firebase-tools deploy --project $FIREBASE_STORYBOOK_PROJECT_ID --token $FIREBASE_STORYBOOK_TOKEN --only hosting
+workspace:
+  version: 2
+  default:
+    jobs:
+      - checkout
+      - lint:
+          requires:
+            - checkout
+      - dry-compile:
+          requires:
+            - checkout
+      - build:
+          requires:
+            - lint
+            - dry-compile
+      - deploy-production:
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
+      - build-storybook:
+          requires:
+            - lint
+            - dry-compile
+      - deploy-storybook:
+          filters:
+            branches:
+              only: master
+          requires:
+            - build-storybook
