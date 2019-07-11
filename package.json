@@ -36,7 +36,7 @@
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/dist/"
+      "/public/"
     ]
   },
   "husky": {
