@@ -32,58 +32,58 @@ jobs:
     <<: *general_options
     steps:
       - attach_workspace:
-        at: ~/repo
+          at: ~/repo
       - run:
-        name: Lint code
-        command: npm run lint
+          name: Lint code
+          command: npm run lint
   dry-compile:
     <<: *general_options
     steps:
       - attach_workspace:
-        at: ~/repo
+          at: ~/repo
       - run:
-        name: Try compile code
-        command: npm run check
+          name: Try compile code
+          command: npm run check
   build:
     <<: *general_options
     steps:
       - attach_workspace:
-        at: ~/repo
+          at: ~/repo
       - run:
-        name: Build
-        command: npm run build
+          name: Build
+          command: npm run build
       - persist_on_workspace:
-        root: ~/repo
-        paths:
-          - .
+          root: ~/repo
+          paths:
+            - .
   deploy-production:
     <<: *general_options
     steps:
       - attach_workspace:
-        at: ~/repo
+          at: ~/repo
       - run:
-        name: Deploy product to firebase
-        command: npx firebase-tools deploy --project $FIREBASE_PROJECT_ID --token $FIREBASE_TOKEN --only hosting
+          name: Deploy product to firebase
+          command: npx firebase-tools deploy --project $FIREBASE_PROJECT_ID --token $FIREBASE_TOKEN --only hosting
   build-storybook:
     <<: *general_options
     steps:
       - attach_workspace:
-        at: ~/repo
+          at: ~/repo
       - run:
-        name: Build storybook
-        command: npm run build:storybook
+          name: Build storybook
+          command: npm run build:storybook
       - persist_on_workspace:
-        root: ~/repo
-        paths:
-          - .
+          root: ~/repo
+          paths:
+            - .
   deploy-storybook:
     <<: *general_options
     steps:
       - attach_workspace:
-        at: ~/repo
+          at: ~/repo
       - run:
-        name: Deploy storybook to firebase
-        command: npx firebase-tools deploy --project $FIREBASE_STORYBOOK_PROJECT_ID --token $FIREBASE_STORYBOOK_TOKEN --only hosting
+          name: Deploy storybook to firebase
+          command: npx firebase-tools deploy --project $FIREBASE_STORYBOOK_PROJECT_ID --token $FIREBASE_STORYBOOK_TOKEN --only hosting
 workspace:
   version: 2
   default:
