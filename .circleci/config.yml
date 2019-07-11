@@ -57,7 +57,7 @@ jobs:
           at: ~/repo
       - run:
           name: Deploy production to firebase
-          command: npx firebase-tools deploy --project=$FIREBASE_PROJECT_ID --token=$FIREBASE_TOKEN --only hosting
+          command: npx firebase-tools deploy --token $FIREBASE_TOKEN --project $FIREBASE_PROJECT_ID --only hosting
   build-storybook:
     <<: *general_options
     steps:
@@ -76,8 +76,8 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Deploy storybook
-          command: npm run storybook:deploy -- --existing-output-dir=public_storybook
+          name: Deploy storybook to firebase
+          command: npx firebase-tools deploy --token=$FIREBASE_TOKEN --project=$FIREBASE_STORYBOOK_PROJECT_ID --only hosting
 workflows:
   version: 2
   default:
