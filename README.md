@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/rechtburg/ReactChatApp.svg?style=svg)](https://circleci.com/gh/rechtburg/ReactChatApp)
+
+
 Hello World!!
 
 This is ChatApp using React & Typescirpt!!
