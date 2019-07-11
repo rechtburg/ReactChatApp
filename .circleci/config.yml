@@ -77,7 +77,7 @@ jobs:
           at: ~/repo
       - run:
           name: Deploy storybook to firebase
-          command: npx firebase-tools deploy --token=$FIREBASE_TOKEN --project=$FIREBASE_STORYBOOK_PROJECT_ID --only hosting --public puclic-storybook
+          command: npx firebase-tools deploy --token=$FIREBASE_TOKEN --project=$FIREBASE_STORYBOOK_PROJECT_ID --only hosting --public public-storybook
 workflows:
   version: 2
   default:
