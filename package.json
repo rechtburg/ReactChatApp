@@ -10,7 +10,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode production",
     "dev": "webpack-dev-server --mode development --config webpack.dev.js",
     "lint": "tslint './src/**/*.ts' './src/**/*.tsx'",
     "lint:fix": "tslint --fix './src/**/*.ts' './src/**/*.tsx'",

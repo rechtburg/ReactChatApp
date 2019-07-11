@@ -1,10 +1,10 @@
 const path = require('path');
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
   entry: {
-    bundle: './src/app.tsx',
+    main: "./src/main.tsx"
   },
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -27,7 +27,7 @@ module.exports = {
       title: "Loading...",
       template: "./src/index.html",
       hash: true,
-      config
+      // config
     })
   ],
   devServer: {
