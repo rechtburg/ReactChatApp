@@ -11,10 +11,11 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack-dev-server --mode development --hot --open --config webpack.dev.js",
+    "dev": "webpack-dev-server --mode development --config webpack.dev.js",
     "lint": "tslint './src/**/*.ts' './src/**/*.tsx'",
     "lint:fix": "tslint --fix './src/**/*.ts' './src/**/*.tsx'",
     "lint:prettier-check": "tslint-config-prettier-check ./tslint.json",
+    "storybook": "start-storybook -p 6006 -c .storybook",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --verbose --coverage"
