@@ -11,11 +11,14 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
+    "build:storybook": "build-storybook -o public-storybook",
     "dev": "webpack-dev-server --mode development --config webpack.dev.js",
+    "check": "tsc --noEmit --pretty",
     "lint": "tslint './src/**/*.ts' './src/**/*.tsx'",
     "lint:fix": "tslint --fix './src/**/*.ts' './src/**/*.tsx'",
     "lint:prettier-check": "tslint-config-prettier-check ./tslint.json",
     "storybook": "start-storybook -p 6006 -c .storybook",
+    "storybook:deploy": "storybook-to-ghpages",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --verbose --coverage"

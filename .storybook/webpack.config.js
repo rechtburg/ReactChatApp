@@ -1,4 +1,4 @@
-const rootConfig = require("../webpack.dev");
+const rootConfig = require("../webpack.config");
 
 module.exports = async ({ config, mode }) => {
   config.module = rootConfig.module;
