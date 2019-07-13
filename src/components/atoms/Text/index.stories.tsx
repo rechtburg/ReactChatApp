@@ -6,7 +6,7 @@ import Text, { TextAlignment, TextTag } from "./index";
 
 storiesOf("Atoms/Text", module)
   .addDecorator(withKnobs)
-  .addDecorator("default", () => {
+  .add("default", () => {
     const textTag = select(
       "textTag",
       {
