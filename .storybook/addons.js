@@ -1,2 +1,2 @@
-require("@storybook/addon-actions");
-require("@storybook/addon-knobs");
+require("@storybook/addon-actions/register");
+require("@storybook/addon-knobs/register");
