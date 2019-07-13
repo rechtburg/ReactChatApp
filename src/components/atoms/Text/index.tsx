@@ -9,17 +9,13 @@ interface Props {
   children?: string;
 }
 
-const Text: React.FC<Props> = ({ color, tag, alignment, maxLines, children }) => {
+const Text: React.FC<Props> = ({ color, tag, alignment, maxLines = 0 }) => {
   const Component = Root.withComponent(getTag(tag));
 
   const _alignment = merge(alignment, TextAlignment.default);
   const _color = merge(color, "#fff");
 
-  return (
-    <Component color={_color} alignment={_alignment} maxLines={maxLines}>
-      {children}
-    </Component>
-  );
+  return <Component color={_color} alignment={_alignment} maxLines={maxLines} />;
 };
 
 export enum TextTag {
