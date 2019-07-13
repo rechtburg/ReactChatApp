@@ -13,7 +13,7 @@ const Text: React.FC<Props> = ({ color, tag, alignment, maxLines = 0 }) => {
   const Component = Root.withComponent(getTag(tag));
 
   const _alignment = merge(alignment, TextAlignment.default);
-  const _color = merge(color, "#fff");
+  const _color = merge(color, "#000");
 
   return <Component color={_color} alignment={_alignment} maxLines={maxLines} />;
 };

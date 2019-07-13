@@ -26,10 +26,11 @@ storiesOf("Atoms/Text", module)
       },
       TextAlignment.default
     );
+    const children = text("children", "Hello World!!", "Children");
 
     return (
       <Text tag={textTag} alignment={_alignment}>
-        {text("text", "Hello World!!")}
+        {children}
       </Text>
     );
   });
