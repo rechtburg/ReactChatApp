@@ -7,7 +7,7 @@ interface Props {
   selectable?: boolean;
 }
 
-const Heading: React.FC<Props> = ({ level }) => {
+const Heading: React.FC<Props> = ({ level = HeadingLevel.h1 }) => {
   const Component = Root.withComponent(getTagName(level));
 
   return <Component />;
